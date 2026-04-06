@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naj'Elle — Prêt-à-porter Féminin</title>
+  <meta name="description" content="Naj'Elle — Mode féminine, style intemporel. Robes, blouses, pantalons et accessoires à prix accessibles."/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <svg class="nav-logo-icon" width="28" height="52" viewBox="0 0 28 52" fill="none">
+      <!-- Tête -->
+      <ellipse cx="14" cy="2.2" rx="2.2" ry="2" fill="#B8860B"/>
+      <!-- Cou -->
+      <rect x="12.8" y="4" width="2.4" height="3.5" rx="1.2" fill="#B8860B"/>
+      <!--
+        Silhouette sablier nette :
+        Épaules  x 8–20  (larg 12)
+        Buste    x 4–24  (larg 20)   ← le plus large
+        Taille   x 10–18 (larg  8)   ← 40 % du buste → sablier marqué
+        Hanches  x 5–23  (larg 18)
+        Bas      x 8–20  (larg 12)
+      -->
+      <path d="
+        M 8 9
+        C 6 10, 3 12, 4 15
+        C 3 18, 8 21, 10 23
+        C 9 26, 4 28, 5 30
+        C 4 33, 7 37, 8 39
+        L 20 39
+        C 21 37, 24 33, 23 30
+        C 24 28, 19 26, 18 23
+        C 20 21, 25 18, 24 15
+        C 25 12, 22 10, 20 9
+        C 18 8, 16 7.5, 14 7.5
+        C 12 7.5, 10 8, 8 9 Z
+      " fill="#B8860B"/>
+      <!-- Tige -->
+      <rect x="13" y="39" width="2" height="7.5" rx="1" fill="#7A5A08" opacity=".9"/>
+      <!-- Base -->
+      <ellipse cx="14" cy="47.5" rx="5.5" ry="1.6" fill="#7A5A08" opacity=".45"/>
+    </svg>
+    <span class="nav-logo-text">Naj<span>'</span>Elle</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#categories">Collections</a></li>
+    <li><a href="boutique.html">Boutique</a></li>
+    <li><a href="#lookbook">Lookbook</a></li>
+    <li><a href="#valeurs">Notre ADN</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="btn-panier" aria-label="Ouvrir le panier">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      <span class="btn-panier-label">Panier (0)</span>
+      <span class="panier-count" aria-live="polite">0</span>
+    </button>
+    <div class="nav-user-wrap" id="nav-user-wrap">
+      <button class="btn-user" id="btn-user" onclick="toggleUserMenu()" aria-label="Mon compte">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span id="user-nav-label">Connexion</span>
+      </button>
+      <div class="user-dropdown" id="user-dropdown">
+        <div class="user-dropdown-header">
+          <div class="user-dropdown-initial" id="user-dropdown-initial">?</div>
+          <div>
+            <div class="user-dropdown-prenom" id="user-dropdown-prenom"></div>
+            <div class="user-dropdown-email" id="user-dropdown-email"></div>
+          </div>
+        </div>
+        <a href="admin.html" class="user-dropdown-item" id="user-dropdown-admin" style="display:none;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:middle;margin-right:4px;opacity:.6"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Administration
+        </a>
+        <a href="compte.html" class="user-dropdown-item">Mon compte</a>
+        <button class="user-dropdown-item danger" onclick="handleUserLogout()">Se déconnecter</button>
+      </div>
+    </div>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Drawer mobile -->
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nav-drawer-panel">
+    <a href="#categories">Collections</a>
+    <a href="boutique.html">Boutique</a>
+    <a href="#lookbook">Lookbook</a>
+    <a href="#valeurs">Notre ADN</a>
+    <a href="#contact">Contact</a>
+    <a href="panier.html">Mon panier</a>
+    <a href="connexion.html" id="drawer-user-link">Se connecter</a>
+  </div>
+</div>
+
+<!-- ═══════════════════ CART SIDEBAR ═══════════════════ -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-sidebar" id="cart-sidebar" aria-label="Panier">
+  <div class="cart-header">
+    <h2>Mon Panier</h2>
+    <button class="cart-close" id="cart-close" aria-label="Fermer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-amount" id="cart-total-amount">0,00 €</span>
+    </div>
+    <p class="cart-shipping-note" id="cart-shipping-note">Plus que 60,00 € pour la livraison offerte</p>
+    <a href="panier.html" class="btn-checkout">Voir mon panier</a>
+  </div>
+</aside>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-deco-1"></div>
+  <div class="hero-deco-2"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow reveal">Nouvelle Collection Printemps 2025</p>
+    <h1 class="hero-title reveal reveal-delay-1">
+      Mode féminine,<br><em>style intemporel</em>
+    </h1>
+    <p class="hero-desc reveal reveal-delay-2">
+      Des pièces soigneusement sélectionnées pour la femme moderne — élégante, confiante, libre. Qualité premium à des prix qui vous surprendront.
+    </p>
+    <div class="hero-ctas reveal reveal-delay-3">
+      <a href="boutique.html" class="btn-primary">Découvrir la collection</a>
+      <a href="#lookbook" class="btn-secondary">Voir le lookbook</a>
+    </div>
+  </div>
+
+  <div class="hero-visual reveal reveal-delay-2">
+    <div class="hero-mannequin-wrap">
+
+      <!-- Fleur gauche -->
+      <svg class="fleur-tl" viewBox="0 0 140 140" fill="none">
+        <g opacity=".85">
+          <ellipse cx="40" cy="80" rx="28" ry="12" fill="#7A9B6E" transform="rotate(-30 40 80)" opacity=".7"/>
+          <ellipse cx="25" cy="65" rx="22" ry="9" fill="#5E8A5A" transform="rotate(-60 25 65)" opacity=".6"/>
+          <ellipse cx="55" cy="90" rx="24" ry="8" fill="#8AAB7E" transform="rotate(-10 55 90)" opacity=".7"/>
+          <circle cx="70" cy="55" r="18" fill="#E8B9A5" opacity=".9"/>
+          <circle cx="70" cy="55" r="13" fill="#DDA090"/>
+          <circle cx="70" cy="55" r="8"  fill="#C97A6A"/>
+          <circle cx="45" cy="68" r="14" fill="#F0D0C5" opacity=".9"/>
+          <circle cx="45" cy="68" r="10" fill="#E8B9A5"/>
+          <circle cx="45" cy="68" r="6"  fill="#DDA090"/>
+          <circle cx="85" cy="72" r="12" fill="#F5E0D8" opacity=".9"/>
+          <circle cx="85" cy="72" r="8"  fill="#EDD0C8"/>
+          <circle cx="85" cy="72" r="5"  fill="#E0B5A8"/>
+        </g>
+      </svg>
+
+      <!-- Fleur droite -->
+      <svg class="fleur-tr" viewBox="0 0 140 140" fill="none">
+        <g opacity=".85">
+          <ellipse cx="40" cy="80" rx="28" ry="12" fill="#7A9B6E" transform="rotate(-30 40 80)" opacity=".7"/>
+          <ellipse cx="25" cy="65" rx="22" ry="9" fill="#5E8A5A" transform="rotate(-60 25 65)" opacity=".6"/>
+          <ellipse cx="55" cy="90" rx="24" ry="8" fill="#8AAB7E" transform="rotate(-10 55 90)" opacity=".7"/>
+          <circle cx="70" cy="55" r="18" fill="#E8B9A5" opacity=".9"/>
+          <circle cx="70" cy="55" r="13" fill="#DDA090"/>
+          <circle cx="70" cy="55" r="8"  fill="#C97A6A"/>
+          <circle cx="45" cy="68" r="14" fill="#F0D0C5" opacity=".9"/>
+          <circle cx="45" cy="68" r="10" fill="#E8B9A5"/>
+          <circle cx="45" cy="68" r="6"  fill="#DDA090"/>
+          <circle cx="85" cy="72" r="12" fill="#F5E0D8" opacity=".9"/>
+          <circle cx="85" cy="72" r="8"  fill="#EDD0C8"/>
+          <circle cx="85" cy="72" r="5"  fill="#E0B5A8"/>
+        </g>
+      </svg>
+
+      <!-- Mannequin SVG — silhouette féminine cintrée -->
+      <svg class="hero-mannequin-svg" viewBox="0 0 240 500" fill="none">
+        <defs>
+          <linearGradient id="mannGold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#D4A017"/>
+            <stop offset="45%" stop-color="#B8860B"/>
+            <stop offset="100%" stop-color="#8B6508"/>
+          </linearGradient>
+          <linearGradient id="mannBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F0E4D0"/>
+            <stop offset="100%" stop-color="#DDD0B8"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Base chromée -->
+        <ellipse cx="120" cy="476" rx="44" ry="10" fill="#C9B8A8" opacity=".35"/>
+        <ellipse cx="120" cy="473" rx="30" ry="6"  fill="#B8A898" opacity=".28"/>
+
+        <!-- Tige -->
+        <rect x="116" y="392" width="8" height="82" rx="4" fill="#C9B8A8"/>
+        <rect x="118" y="392" width="3" height="82" rx="1.5" fill="rgba(255,255,255,.22)"/>
+
+        <!--
+          CORPS — proportions mannequin de couture féminin
+          Épaules  : x 70–170  (larg. 100)
+          Buste    : x 46–194  (larg. 148) ← le plus large
+          Taille   : x 83–157  (larg.  74) ← très cintrée
+          Hanches  : x 50–190  (larg. 140)
+          Bas      : x 76–164  (larg.  88)
+        -->
+        <path d="
+          M 70 90
+          C 48 96, 34 124, 46 154
+          C 44 178, 66 210, 83 232
+          C 72 256, 42 278, 50 302
+          C 50 328, 64 360, 76 386
+          L 80 392
+          L 160 392
+          L 164 386
+          C 176 360, 190 328, 190 302
+          C 198 278, 168 256, 157 232
+          C 174 210, 196 178, 194 154
+          C 206 124, 192 96, 170 90
+          C 156 84, 138 81, 120 81
+          C 102 81, 84 84, 70 90
+          Z
+        " fill="url(#mannBody)" stroke="#C9B8A8" stroke-width="1.2"/>
+
+        <!-- Ombre latérale gauche (volume) -->
+        <path d="
+          M 70 90
+          C 48 96, 34 124, 46 154
+          C 44 178, 66 210, 83 232
+          C 72 256, 42 278, 50 302
+          C 50 328, 64 360, 76 386
+          L 84 386
+          C 72 360, 58 328, 58 302
+          C 52 278, 80 256, 90 232
+          C 73 210, 52 178, 54 154
+          C 66 124, 78 96, 96 90
+          Z
+        " fill="#C9B8A8" opacity=".18"/>
+
+        <!-- Couture centrale dorée -->
+        <line x1="120" y1="83" x2="120" y2="392"
+              stroke="#B8860B" stroke-width=".7" stroke-dasharray="4,8" opacity=".32"/>
+
+        <!-- Ligne de buste -->
+        <path d="M 66 160 Q 120 150 174 160"
+              stroke="#B8860B" stroke-width=".8" fill="none" opacity=".38"/>
+
+        <!-- Ligne de taille (seam) -->
+        <path d="M 83 232 C 98 226, 109 224, 120 225 C 131 224, 142 226, 157 232"
+              stroke="#B8A898" stroke-width="1.5" fill="none"/>
+        <path d="M 90 230 C 102 224, 112 223, 120 223"
+              stroke="rgba(255,255,255,.28)" stroke-width="1" fill="none"/>
+
+        <!-- Ligne de hanches -->
+        <path d="M 56 302 C 78 293, 100 290, 120 291 C 140 290, 162 293, 184 302"
+              stroke="#C9B8A8" stroke-width=".8" fill="none" opacity=".5"/>
+
+        <!-- Cou élancé -->
+        <rect x="112" y="58" width="16" height="28" rx="8"
+              fill="url(#mannBody)" stroke="#C9B8A8" stroke-width="1"/>
+
+        <!-- Tête ovale -->
+        <ellipse cx="120" cy="53" rx="18" ry="13"
+                 fill="url(#mannBody)" stroke="#C9B8A8" stroke-width="1"/>
+
+        <!-- Lignes d'épaules décoratives -->
+        <path d="M 70 90 Q 46 106, 34 136"
+              stroke="#C9B8A8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M 170 90 Q 194 106, 206 136"
+              stroke="#C9B8A8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+        <!-- Ornement doré sommet -->
+        <ellipse cx="120" cy="38" rx="5" ry="4" fill="url(#mannGold)" opacity=".82"/>
+        <rect x="118" y="41.5" width="4" height="5" rx="2" fill="url(#mannGold)" opacity=".65"/>
+      </svg>
+
+      <!-- Badge flottant -->
+      <div class="hero-badge">
+        <p class="hero-badge-label">Jusqu'à</p>
+        <p class="hero-badge-value">−40%</p>
+        <p class="hero-badge-sub">sur les nouvelles pièces</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PROMO BAND ═══════════════════ -->
+<div class="promo-band">
+  <div class="promo-band-inner">
+    <span class="promo-item"><span class="promo-dot"></span> Livraison offerte dès 60€</span>
+    <span class="promo-item"><span class="promo-dot"></span> Retours gratuits 30 jours</span>
+    <span class="promo-item"><span class="promo-dot"></span> Paiement 3× sans frais</span>
+    <span class="promo-item"><span class="promo-dot"></span> Nouvelles pièces chaque semaine</span>
+    <span class="promo-item"><span class="promo-dot"></span> Livraison offerte dès 60€</span>
+    <span class="promo-item"><span class="promo-dot"></span> Retours gratuits 30 jours</span>
+    <span class="promo-item"><span class="promo-dot"></span> Paiement 3× sans frais</span>
+    <span class="promo-item"><span class="promo-dot"></span> Nouvelles pièces chaque semaine</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ STATS ═══════════════════ -->
+<div class="stats-band">
+  <div class="stat-item reveal">
+    <div class="stat-number">500+</div>
+    <div class="stat-label">Références</div>
+  </div>
+  <div class="stat-sep"></div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-number">4.9★</div>
+    <div class="stat-label">Note clients</div>
+  </div>
+  <div class="stat-sep"></div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-number">−40%</div>
+    <div class="stat-label">Jusqu'à</div>
+  </div>
+  <div class="stat-sep"></div>
+  <div class="stat-item reveal reveal-delay-3">
+    <div class="stat-number">48h</div>
+    <div class="stat-label">Livraison express</div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CATÉGORIES ═══════════════════ -->
+<section class="categories" id="categories">
+  <div class="section-heading reveal">
+    <p class="section-eyebrow">Nos univers</p>
+    <h2 class="section-title">Explorer les <em>Collections</em></h2>
+    <div class="section-rule"><span></span><i></i><span></span></div>
+  </div>
+  <div class="cat-grid">
+
+    <div class="cat-card reveal">
+      <div class="cat-placeholder" style="background: linear-gradient(160deg,#EDD5C8,#D4A898);">
+        <svg class="cat-placeholder-svg" width="60" height="100" viewBox="0 0 60 100" fill="none">
+          <ellipse cx="30" cy="14" rx="10" ry="12" fill="#6B4F42"/>
+          <path d="M18 26C10 30 6 48 6 60L54 60C54 48 50 30 42 26" fill="#6B4F42"/>
+          <rect x="27" y="60" width="6" height="30" rx="3" fill="#6B4F42"/>
+        </svg>
+        <span class="cat-placeholder-text">Robes & Jupes</span>
+      </div>
+      <div class="cat-overlay">
+        <h3 class="cat-name">Robes & Jupes</h3>
+        <a href="boutique.html?cat=robes" class="cat-link">Voir la collection →</a>
+      </div>
+    </div>
+
+    <div class="cat-card reveal reveal-delay-1">
+      <div class="cat-placeholder" style="background: linear-gradient(160deg,#F5D9CC,#EABFAF);">
+        <svg class="cat-placeholder-svg" width="70" height="80" viewBox="0 0 70 80" fill="none">
+          <path d="M10 20L5 70L65 70L60 20L45 10L35 25L25 10Z" fill="#6B4F42"/>
+        </svg>
+        <span class="cat-placeholder-text">Hauts & Blouses</span>
+      </div>
+      <div class="cat-overlay">
+        <h3 class="cat-name">Hauts & Blouses</h3>
+        <a href="boutique.html?cat=hauts" class="cat-link">Voir la collection →</a>
+      </div>
+    </div>
+
+    <div class="cat-card reveal reveal-delay-2">
+      <div class="cat-placeholder" style="background: linear-gradient(160deg,#F9EDE6,#EDD5C8);">
+        <svg class="cat-placeholder-svg" width="70" height="80" viewBox="0 0 70 80" fill="none">
+          <rect x="15" y="5" width="40" height="70" rx="4" fill="#6B4F42"/>
+          <rect x="25" y="5" width="20" height="15" rx="3" fill="#8C6E63"/>
+        </svg>
+        <span class="cat-placeholder-text">Pantalons</span>
+      </div>
+      <div class="cat-overlay">
+        <h3 class="cat-name">Pantalons</h3>
+        <a href="boutique.html?cat=pantalons" class="cat-link">Voir la collection →</a>
+      </div>
+    </div>
+
+    <div class="cat-card reveal reveal-delay-3">
+      <div class="cat-placeholder" style="background: linear-gradient(160deg,#D4BF8A,#C9A840);">
+        <svg class="cat-placeholder-svg" width="70" height="80" viewBox="0 0 70 80" fill="none">
+          <path d="M5 20Q35 5 65 20L60 75L10 75Z" fill="#6B4F42"/>
+        </svg>
+        <span class="cat-placeholder-text">Accessoires</span>
+      </div>
+      <div class="cat-overlay">
+        <h3 class="cat-name">Accessoires</h3>
+        <a href="boutique.html?cat=accessoires" class="cat-link">Voir la collection →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ PRODUITS VEDETTES ═══════════════════ -->
+<section class="produits" id="produits">
+  <div class="section-heading reveal">
+    <p class="section-eyebrow">Sélection du moment</p>
+    <h2 class="section-title">Nos <em>Coups de Cœur</em></h2>
+    <p class="section-sub">Pièces soigneusement choisies pour leur qualité, leur confort et leur élégance naturelle.</p>
+    <div class="section-rule"><span></span><i></i><span></span></div>
+  </div>
+
+  <div class="produits-grid" id="home-produits-grid">
+    <!-- Chargé dynamiquement par db.js -->
+  </div>
+
+  <div style="text-align:center; margin-top:56px;" class="reveal">
+    <a href="boutique.html" class="btn-primary">Voir toute la boutique</a>
+  </div>
+</section>
+
+<!-- ═══════════════════ VALEURS ═══════════════════ -->
+<section class="valeurs" id="valeurs">
+  <div class="section-heading reveal">
+    <p class="section-eyebrow">Notre promesse</p>
+    <h2 class="section-title">L'ADN <em>Naj'Elle</em></h2>
+    <div class="section-rule"><span></span><i></i><span></span></div>
+  </div>
+  <div class="valeurs-grid">
+
+    <div class="valeur-item reveal">
+      <div class="valeur-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="1.5">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </div>
+      <h3 class="valeur-title">Qualité Certifiée</h3>
+      <p class="valeur-text">Chaque pièce est soigneusement sélectionnée pour ses matières, sa coupe et sa durabilité. Nous ne proposons que ce que nous porterions nous-mêmes.</p>
+    </div>
+
+    <div class="valeur-item reveal reveal-delay-1">
+      <div class="valeur-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 8v4l3 3"/>
+        </svg>
+      </div>
+      <h3 class="valeur-title">Prix Accessibles</h3>
+      <p class="valeur-text">La mode de qualité ne devrait pas être un privilège. Nous négocions pour vous offrir des pièces premium à des tarifs honnêtes et transparents.</p>
+    </div>
+
+    <div class="valeur-item reveal reveal-delay-2">
+      <div class="valeur-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="1.5">
+          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+        </svg>
+      </div>
+      <h3 class="valeur-title">Confort & Style</h3>
+      <p class="valeur-text">Nos créations épousent le corps avec grâce. Parce qu'une femme qui se sent bien dans ses vêtements rayonne naturellement de confiance.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ LOOKBOOK ═══════════════════ -->
+<section class="lookbook" id="lookbook">
+  <div class="lookbook-layout">
+    <div class="lookbook-visual">
+      <div class="lb-img">
+        <div class="lb-placeholder">
+          <svg width="40" height="60" viewBox="0 0 40 60" fill="none">
+            <ellipse cx="20" cy="10" rx="8" ry="9" fill="#8C6E63" opacity=".5"/>
+            <path d="M8 19C2 24 0 40 0 52L40 52C40 40 38 24 32 19" fill="#8C6E63" opacity=".5"/>
+          </svg>
+          <span>Lookbook photo 1</span>
+        </div>
+      </div>
+      <div class="lb-img" style="background: linear-gradient(160deg,#EDD5C8,#D4A898);">
+        <div class="lb-placeholder">
+          <svg width="40" height="60" viewBox="0 0 40 60" fill="none">
+            <ellipse cx="20" cy="10" rx="8" ry="9" fill="#6B4F42" opacity=".5"/>
+            <path d="M8 19C2 24 0 40 0 52L40 52C40 40 38 24 32 19" fill="#6B4F42" opacity=".5"/>
+          </svg>
+          <span>Lookbook photo 2</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lookbook-content">
+      <div class="section-heading reveal">
+        <p class="section-eyebrow">Inspiration printemps</p>
+        <h2 class="section-title">Le Lookbook<br><em>Naj'Elle</em></h2>
+        <div class="section-rule"><span></span><i></i><span></span></div>
+      </div>
+      <p class="lookbook-text reveal">
+        La collection Printemps célèbre la légèreté et la féminité douce. Des teintes rosées, des matières fluides, des coupes qui libèrent — chaque tenue raconte une histoire de confort et de grâce au quotidien.
+      </p>
+      <p class="lookbook-text reveal" style="font-style:italic; font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:var(--brun-doux);">
+        « S'habiller bien, c'est se respecter. »
+      </p>
+      <div class="reveal">
+        <a href="boutique.html" class="btn-primary">Explorer le lookbook</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ NEWSLETTER ═══════════════════ -->
+<section class="newsletter" id="contact">
+  <p class="newsletter-eyebrow reveal">Restez dans la tendance</p>
+  <h2 class="newsletter-title reveal"><em>Rejoignez</em> la communauté</h2>
+  <p class="newsletter-sub reveal">Nouveautés en avant-première, offres exclusives et conseils style directement dans votre boîte mail.</p>
+  <form class="newsletter-form reveal" novalidate>
+    <input class="newsletter-input" type="email" placeholder="Votre adresse email…" required/>
+    <button class="newsletter-btn" type="submit">S'inscrire</button>
+  </form>
+  <p class="newsletter-success">Merci ! Vous faites maintenant partie de la communauté Naj'Elle.</p>
+</section>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <svg width="22" height="42" viewBox="0 0 28 52" fill="none">
+          <ellipse cx="14" cy="2.2" rx="2.2" ry="2" fill="#B8860B"/>
+          <rect x="12.8" y="4" width="2.4" height="3.5" rx="1.2" fill="#B8860B"/>
+          <path d="M8 9C6 10,3 12,4 15C3 18,8 21,10 23C9 26,4 28,5 30C4 33,7 37,8 39L20 39C21 37,24 33,23 30C24 28,19 26,18 23C20 21,25 18,24 15C25 12,22 10,20 9C18 8,16 7.5,14 7.5C12 7.5,10 8,8 9Z" fill="#B8860B"/>
+          <rect x="13" y="39" width="2" height="7.5" rx="1" fill="#7A5A08" opacity=".9"/>
+          <ellipse cx="14" cy="47.5" rx="5.5" ry="1.6" fill="#7A5A08" opacity=".45"/>
+        </svg>
+        <span class="footer-brand-text">Naj<span>'</span>Elle</span>
+      </div>
+      <p class="footer-tagline">Prêt-à-porter féminin — Confort & Style</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,250,247,.5)" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="rgba(255,250,247,.5)" stroke="none"/>
+          </svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,250,247,.5)" stroke-width="1.5">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+          </svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="TikTok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,250,247,.5)">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.78a4.85 4.85 0 01-1.01-.09z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <p class="footer-col-title">Boutique</p>
+      <ul class="footer-links">
+        <li><a href="boutique.html">Nouveautés</a></li>
+        <li><a href="boutique.html?cat=robes">Robes & Jupes</a></li>
+        <li><a href="boutique.html?cat=hauts">Hauts & Blouses</a></li>
+        <li><a href="boutique.html?cat=pantalons">Pantalons</a></li>
+        <li><a href="boutique.html?cat=accessoires">Accessoires</a></li>
+        <li><a href="boutique.html?sort=promo">Promotions</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footer-col-title">Informations</p>
+      <ul class="footer-links">
+        <li><a href="#valeurs">Notre histoire</a></li>
+        <li><a href="#">Guide des tailles</a></li>
+        <li><a href="#">Livraison & Retours</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Blog mode</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footer-col-title">Contact</p>
+      <ul class="footer-links">
+        <li><a href="#">@naj_elle (Instagram)</a></li>
+        <li><a href="mailto:contact@najelle.fr">contact@najelle.fr</a></li>
+        <li><a href="#">Lun–Sam · 9h–19h</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Naj'Elle — Tous droits réservés</p>
+    <div class="footer-payments">
+      <span class="payment-chip">Visa</span>
+      <span class="payment-chip">Mastercard</span>
+      <span class="payment-chip">PayPal</span>
+      <span class="payment-chip">Apple Pay</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/user-auth.js"></script>
+<script src="js/db.js"></script>
+<script src="js/main.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    NajDB.renderGrid('home-produits-grid', { featured: true });
+  });
+</script>
+</body>
+</html>

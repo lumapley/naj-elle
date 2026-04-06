@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naj'Elle — Prêt-à-porter Féminin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rose-pale:     #F2C4B8;
+      --rose-moyen:    #E0977F;
+      --rose-profond:  #C96050;
+      --gold:          #B8860B;
+      --gold-light:    #D4A017;
+      --creme:         #F9E8E0;
+      --blanc:         #FDF0EA;
+      --brun-doux:     #6B4F42;
+      --texte:         #3A2A24;
+      --texte-leger:   #8C6E63;
+      --noir-doux:     #1E1410;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--blanc);
+      color: var(--texte);
+      overflow-x: hidden;
+    }
+
+    /* ────────── SCROLLBAR ────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--creme); }
+    ::-webkit-scrollbar-thumb { background: var(--rose-moyen); border-radius: 3px; }
+
+    /* ────────── NAV ────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 60px;
+      background: rgba(253,240,234,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,169,110,0.18);
+      transition: padding .4s;
+    }
+    nav.scrolled { padding: 14px 60px; }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 22px; height: 42px;
+    }
+    .nav-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 600; letter-spacing: .12em;
+      color: var(--texte);
+    }
+    .nav-logo-text span { color: var(--gold); }
+
+    .nav-links {
+      display: flex; gap: 40px; list-style: none;
+    }
+    .nav-links a {
+      font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--texte-leger); text-decoration: none; font-weight: 400;
+      transition: color .3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--gold);
+      transition: width .35s;
+    }
+    .nav-links a:hover { color: var(--texte); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-actions {
+      display: flex; align-items: center; gap: 20px;
+    }
+    .btn-panier {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--texte); text-decoration: none; font-weight: 500;
+      border: 1px solid var(--gold); padding: 9px 22px; border-radius: 30px;
+      transition: all .3s;
+    }
+    .btn-panier:hover { background: var(--gold); color: var(--blanc); }
+
+    /* ────────── HERO ────────── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #F2C4B8 0%, #EAAD9E 35%, #F5D0C4 75%, #F9E8E0 100%);
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 60px 60px;
+      position: relative; overflow: hidden;
+    }
+
+    /* Grain texture overlay */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      opacity: .4; pointer-events: none;
+    }
+
+    /* Decorative circles */
+    .hero-deco-1 {
+      position: absolute; width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,169,110,.12) 0%, transparent 70%);
+      top: -100px; right: -80px; pointer-events: none;
+    }
+    .hero-deco-2 {
+      position: absolute; width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,185,165,.25) 0%, transparent 70%);
+      bottom: 40px; left: 20px; pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-eyebrow {
+      font-size: .72rem; letter-spacing: .35em; text-transform: uppercase;
+      color: var(--gold); font-weight: 400; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 32px; height: 1px; background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 6vw, 5.8rem);
+      font-weight: 300; line-height: 1.05;
+      color: var(--texte); margin-bottom: 28px;
+    }
+    .hero-title em {
+      font-style: italic; color: var(--gold); font-weight: 400;
+    }
+
+    .hero-desc {
+      font-size: .95rem; font-weight: 300; line-height: 1.85;
+      color: var(--texte-leger); max-width: 420px; margin-bottom: 48px;
+    }
+
+    .hero-ctas { display: flex; gap: 20px; align-items: center; }
+
+    .btn-primary {
+      background: var(--texte); color: var(--blanc);
+      padding: 16px 40px; border-radius: 3px;
+      font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
+      text-decoration: none; font-weight: 400;
+      transition: all .35s;
+      border: 1px solid var(--texte);
+    }
+    .btn-primary:hover { background: var(--gold); border-color: var(--gold); }
+
+    .btn-secondary {
+      font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--texte-leger); text-decoration: none; font-weight: 400;
+      display: flex; align-items: center; gap: 10px;
+      transition: color .3s;
+    }
+    .btn-secondary:hover { color: var(--gold); }
+    .btn-secondary::after {
+      content: '→'; font-size: 1.1em;
+    }
+
+    .hero-visual {
+      position: relative; z-index: 2;
+      display: flex; justify-content: center; align-items: flex-end;
+    }
+
+    .hero-mannequin-wrap {
+      position: relative; width: 380px; height: 520px;
+    }
+
+    /* SVG Mannequin stylisé */
+    .hero-mannequin-svg {
+      width: 100%; height: 100%;
+      filter: drop-shadow(0 30px 60px rgba(58,42,36,.15));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* Fleurs décoratives SVG */
+    .fleur-tl, .fleur-tr {
+      position: absolute; width: 140px; height: 140px;
+    }
+    .fleur-tl { top: -30px; left: -30px; }
+    .fleur-tr { top: -20px; right: -20px; transform: scaleX(-1); }
+
+    /* Badge promo */
+    .hero-badge {
+      position: absolute; bottom: 40px; left: -30px;
+      background: var(--blanc); border: 1px solid var(--gold-light);
+      border-radius: 12px; padding: 18px 24px;
+      box-shadow: 0 8px 32px rgba(201,169,110,.15);
+      animation: float 6s ease-in-out infinite reverse;
+    }
+    .hero-badge-label {
+      font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--texte-leger); margin-bottom: 4px;
+    }
+    .hero-badge-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 600; color: var(--gold);
+    }
+    .hero-badge-sub {
+      font-size: .72rem; color: var(--texte-leger); margin-top: 2px;
+    }
+
+    /* ────────── STATS BAND ────────── */
+    .stats-band {
+      background: var(--texte);
+      padding: 32px 60px;
+      display: flex; justify-content: space-around; align-items: center;
+    }
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; font-weight: 600; color: var(--gold);
+    }
+    .stat-label {
+      font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(255,250,247,.5); margin-top: 4px;
+    }
+    .stat-sep { width: 1px; height: 50px; background: rgba(255,250,247,.12); }
+
+    /* ────────── SECTION HEADING ────────── */
+    .section-heading {
+      text-align: center; margin-bottom: 60px;
+    }
+    .section-eyebrow {
+      font-size: .72rem; letter-spacing: .35em; text-transform: uppercase;
+      color: var(--gold); font-weight: 400; margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300;
+      color: var(--texte); line-height: 1.2;
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-sub {
+      font-size: .9rem; color: var(--texte-leger); font-weight: 300;
+      margin-top: 14px; max-width: 480px; margin-inline: auto; line-height: 1.8;
+    }
+    .section-rule {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin-top: 20px;
+    }
+    .section-rule span { width: 40px; height: 1px; background: var(--gold-light); }
+    .section-rule i {
+      width: 6px; height: 6px; border: 1px solid var(--gold);
+      transform: rotate(45deg); display: block;
+    }
+
+    /* ────────── CATÉGORIES ────────── */
+    .categories { padding: 100px 60px; background: var(--creme); }
+
+    .cat-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .cat-card {
+      position: relative; overflow: hidden; border-radius: 4px;
+      cursor: pointer;
+    }
+    .cat-card:first-child { grid-row: span 2; }
+
+    .cat-img {
+      width: 100%; height: 100%; min-height: 260px;
+      object-fit: cover; display: block;
+      transition: transform .7s ease;
+    }
+    .cat-card:first-child .cat-img { min-height: 560px; }
+    .cat-card:hover .cat-img { transform: scale(1.06); }
+
+    /* placeholder avec dégradé */
+    .cat-placeholder {
+      width: 100%; min-height: 260px;
+      background: var(--rose-pale);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: transform .7s ease;
+      position: relative; overflow: hidden;
+    }
+    .cat-card:first-child .cat-placeholder { min-height: 560px; }
+
+    .cat-placeholder-svg {
+      opacity: .35; margin-bottom: 12px;
+    }
+    .cat-placeholder-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-style: italic; color: var(--brun-doux); opacity: .6;
+    }
+
+    .cat-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(58,42,36,.6) 0%, transparent 55%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 28px;
+    }
+    .cat-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 400; color: var(--blanc);
+      margin-bottom: 6px;
+    }
+    .cat-link {
+      font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold-light); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      opacity: 0; transform: translateY(8px);
+      transition: all .4s;
+    }
+    .cat-card:hover .cat-link { opacity: 1; transform: translateY(0); }
+
+    /* ────────── PRODUITS VEDETTES ────────── */
+    .produits { padding: 100px 60px; background: var(--blanc); }
+
+    .produits-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;
+    }
+
+    .produit-card {
+      cursor: pointer;
+    }
+    .produit-img-wrap {
+      position: relative; overflow: hidden; border-radius: 4px;
+      background: var(--rose-pale); aspect-ratio: 3/4;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .produit-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+      color: var(--texte-leger);
+      background: linear-gradient(160deg, var(--rose-pale), #EDD5C8);
+    }
+    .produit-placeholder svg { opacity: .3; }
+    .produit-placeholder span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .95rem; font-style: italic; opacity: .5;
+    }
+
+    .produit-badge {
+      position: absolute; top: 14px; left: 14px;
+      background: var(--texte); color: var(--blanc);
+      font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 2px;
+    }
+    .produit-badge.new { background: var(--gold); }
+    .produit-badge.promo { background: var(--rose-profond); }
+
+    .produit-actions {
+      position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 8px;
+      opacity: 0; transition: opacity .35s;
+    }
+    .produit-card:hover .produit-actions { opacity: 1; }
+
+    .btn-add {
+      background: var(--texte); color: var(--blanc);
+      font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+      padding: 10px 24px; border: none; cursor: pointer;
+      transition: background .3s; white-space: nowrap;
+      font-family: 'Jost', sans-serif;
+    }
+    .btn-add:hover { background: var(--gold); }
+
+    .btn-wish {
+      background: var(--blanc); border: none; cursor: pointer;
+      width: 38px; height: 38px; display: flex; align-items: center;
+      justify-content: center; transition: background .3s;
+    }
+    .btn-wish:hover { background: var(--rose-pale); }
+
+    .produit-info { padding: 16px 0 0; }
+    .produit-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-weight: 500; color: var(--texte);
+      margin-bottom: 4px;
+    }
+    .produit-cat {
+      font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--texte-leger); margin-bottom: 8px;
+    }
+    .produit-prix {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .prix-actuel {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 600; color: var(--texte);
+    }
+    .prix-barre {
+      font-size: .85rem; color: var(--rose-moyen);
+      text-decoration: line-through;
+    }
+
+    /* ────────── BANDEAU PROMO ────────── */
+    .promo-band {
+      background: var(--gold); padding: 18px;
+      text-align: center; overflow: hidden;
+    }
+    .promo-band-inner {
+      display: flex; gap: 60px; justify-content: center; align-items: center;
+      animation: marquee 20s linear infinite;
+    }
+    .promo-item {
+      display: flex; align-items: center; gap: 12px;
+      font-size: .78rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--blanc); white-space: nowrap; font-weight: 400;
+    }
+    .promo-dot {
+      width: 4px; height: 4px; background: rgba(255,255,255,.5); border-radius: 50%;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ────────── VALEURS / ENGAGEMENTS ────────── */
+    .valeurs { padding: 100px 60px; background: var(--rose-pale); }
+
+    .valeurs-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
+    }
+    .valeur-item { text-align: center; }
+    .valeur-icon {
+      width: 64px; height: 64px; margin: 0 auto 24px;
+      background: var(--blanc); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(201,169,110,.15);
+    }
+    .valeur-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 500; color: var(--texte);
+      margin-bottom: 12px;
+    }
+    .valeur-text {
+      font-size: .88rem; font-weight: 300; line-height: 1.8;
+      color: var(--texte-leger);
+    }
+
+    /* ────────── LOOKBOOK BAND ────────── */
+    .lookbook { padding: 100px 60px; background: var(--blanc); }
+
+    .lookbook-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .lookbook-visual {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .lb-img {
+      border-radius: 4px; overflow: hidden;
+      background: var(--rose-pale); aspect-ratio: 2/3;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lb-img:first-child {
+      margin-top: 40px; background: #EDD5C8;
+    }
+    .lb-placeholder {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 8px; opacity: .35;
+    }
+    .lb-placeholder span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .9rem; font-style: italic; color: var(--brun-doux);
+    }
+
+    .lookbook-content {}
+    .lookbook-content .section-heading { text-align: left; margin-bottom: 32px; }
+    .lookbook-content .section-rule { justify-content: flex-start; }
+
+    .lookbook-text {
+      font-size: .95rem; font-weight: 300; line-height: 1.9;
+      color: var(--texte-leger); margin-bottom: 36px;
+    }
+
+    /* ────────── NEWSLETTER ────────── */
+    .newsletter {
+      padding: 100px 60px;
+      background: var(--texte);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .newsletter::before {
+      content: 'NAJ'ELLE';
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(8rem, 18vw, 18rem); font-weight: 600;
+      color: rgba(255,255,255,.025); letter-spacing: .1em;
+      pointer-events: none; user-select: none;
+    }
+
+    .newsletter-eyebrow {
+      font-size: .72rem; letter-spacing: .35em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px;
+    }
+    .newsletter-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300;
+      color: var(--blanc); margin-bottom: 16px;
+    }
+    .newsletter-title em { font-style: italic; color: var(--gold); }
+    .newsletter-sub {
+      font-size: .9rem; font-weight: 300; color: rgba(255,250,247,.5);
+      max-width: 400px; margin: 0 auto 40px; line-height: 1.8;
+    }
+    .newsletter-form {
+      display: flex; gap: 0; max-width: 480px; margin: 0 auto;
+    }
+    .newsletter-input {
+      flex: 1; padding: 16px 24px;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      color: var(--blanc); font-family: 'Jost', sans-serif;
+      font-size: .88rem; outline: none;
+      transition: border-color .3s;
+    }
+    .newsletter-input::placeholder { color: rgba(255,255,255,.3); }
+    .newsletter-input:focus { border-color: var(--gold); }
+    .newsletter-btn {
+      background: var(--gold); color: var(--blanc); border: none; cursor: pointer;
+      padding: 16px 32px; font-family: 'Jost', sans-serif;
+      font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
+      font-weight: 400; transition: background .3s;
+    }
+    .newsletter-btn:hover { background: var(--rose-profond); }
+
+    /* ────────── FOOTER ────────── */
+    footer {
+      background: var(--noir-doux); padding: 70px 60px 40px;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 60px; margin-bottom: 60px;
+    }
+
+    .footer-brand {}
+    .footer-logo {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .footer-brand-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600; letter-spacing: .12em;
+      color: var(--blanc);
+    }
+    .footer-brand-text span { color: var(--gold); }
+    .footer-tagline {
+      font-size: .8rem; font-style: italic; color: rgba(255,255,255,.3);
+      margin-bottom: 24px; letter-spacing: .05em;
+    }
+    .footer-socials { display: flex; gap: 14px; }
+    .social-btn {
+      width: 36px; height: 36px; border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      transition: all .3s; cursor: pointer;
+    }
+    .social-btn:hover { border-color: var(--gold); background: rgba(201,169,110,.1); }
+
+    .footer-col-title {
+      font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 24px; font-weight: 400;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a {
+      font-size: .88rem; color: rgba(255,255,255,.45); text-decoration: none;
+      font-weight: 300; transition: color .3s;
+    }
+    .footer-links a:hover { color: var(--blanc); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 30px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy {
+      font-size: .78rem; color: rgba(255,255,255,.25); font-weight: 300;
+    }
+    .footer-payments { display: flex; gap: 8px; }
+    .payment-chip {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 4px; padding: 4px 10px;
+      font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+    }
+
+    /* ────────── ANIMATIONS D'ENTRÉE ────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { animation: fadeUp .7s ease both; }
+    .reveal-delay-1 { animation-delay: .15s; }
+    .reveal-delay-2 { animation-delay: .3s; }
+    .reveal-delay-3 { animation-delay: .45s; }
+    .reveal-delay-4 { animation-delay: .6s; }
+
+    /* ────────── RESPONSIVE ────────── */
+    @media (max-width: 1024px) {
+      nav { padding: 18px 30px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 120px 30px 60px; text-align: center; }
+      .hero-eyebrow, .hero-ctas { justify-content: center; }
+      .hero-desc { margin-inline: auto; }
+      .hero-visual { justify-content: center; margin-top: 40px; }
+      .hero-mannequin-wrap { width: 280px; height: 380px; }
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+      .cat-card:first-child { grid-row: span 1; }
+      .cat-card:first-child .cat-placeholder { min-height: 280px; }
+      .produits-grid { grid-template-columns: repeat(2, 1fr); }
+      .valeurs-grid { grid-template-columns: 1fr; gap: 32px; }
+      .lookbook-layout { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .stats-band { flex-wrap: wrap; gap: 30px; padding: 30px; }
+      .stat-sep { display: none; }
+      section { padding-inline: 30px !important; }
+    }
+
+    @media (max-width: 600px) {
+      .produits-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-input, .newsletter-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">
+      <!-- Logo Mannequin Silhouette féminine élancée -->
+      <svg class="nav-logo-icon" width="28" height="52" viewBox="0 0 28 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Tête ovale fine -->
+        <ellipse cx="14" cy="4.5" rx="4.5" ry="4" fill="#B8860B"/>
+        <!-- Cou fin -->
+        <rect x="12.5" y="8" width="3" height="5" rx="1.5" fill="#B8860B"/>
+        <!-- Corps silhouette féminine : épaules > taille fine > hanches > bas -->
+        <path d="
+          M 5 13
+          C 2 15, 1 20, 1.5 24
+          C 2 28, 4 30, 4.5 32
+          C 3 34, 2.5 36, 3 38
+          C 3.5 41, 5.5 44, 7 45
+          L 21 45
+          C 22.5 44, 24.5 41, 25 38
+          C 25.5 36, 25 34, 23.5 32
+          C 24 30, 26 28, 26.5 24
+          C 27 20, 26 15, 23 13
+          C 20.5 11.5, 17 11, 14 11
+          C 11 11, 7.5 11.5, 5 13 Z
+        " fill="#B8860B"/>
+        <!-- Taille fine (ombre interne) -->
+        <path d="M 4 31 Q 14 27.5 24 31" fill="none" stroke="#8B6508" stroke-width="1"/>
+        <!-- Tige -->
+        <rect x="12.8" y="45" width="2.4" height="5" rx="1.2" fill="#8B6508" opacity=".8"/>
+        <!-- Base -->
+        <ellipse cx="14" cy="50.5" rx="7" ry="1.8" fill="#8B6508" opacity=".45"/>
+      </svg>
+      <span class="nav-logo-text">Naj<span>'</span>Elle</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#categories">Collections</a></li>
+      <li><a href="#produits">Nouveautés</a></li>
+      <li><a href="#lookbook">Lookbook</a></li>
+      <li><a href="#valeurs">Notre ADN</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn-panier">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        Panier (0)
+      </a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-deco-1"></div>
+    <div class="hero-deco-2"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal">Nouvelle Collection Printemps 2025</p>
+      <h1 class="hero-title reveal reveal-delay-1">
+        Mode féminine,<br><em>style intemporel</em>
+      </h1>
+      <p class="hero-desc reveal reveal-delay-2">
+        Des pièces soigneusement sélectionnées pour la femme moderne — élégante, confiante, libre. Qualité premium à des prix qui vous surprendront.
+      </p>
+      <div class="hero-ctas reveal reveal-delay-3">
+        <a href="#produits" class="btn-primary">Découvrir la collection</a>
+        <a href="#lookbook" class="btn-secondary">Voir le lookbook</a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal reveal-delay-2">
+      <div class="hero-mannequin-wrap">
+
+        <!-- Fleur gauche -->
+        <svg class="fleur-tl" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g opacity=".85">
+            <!-- Feuilles -->
+            <ellipse cx="40" cy="80" rx="28" ry="12" fill="#7A9B6E" transform="rotate(-30 40 80)" opacity=".7"/>
+            <ellipse cx="25" cy="65" rx="22" ry="9" fill="#5E8A5A" transform="rotate(-60 25 65)" opacity=".6"/>
+            <ellipse cx="55" cy="90" rx="24" ry="8" fill="#8AAB7E" transform="rotate(-10 55 90)" opacity=".7"/>
+            <!-- Roses -->
+            <circle cx="70" cy="55" r="18" fill="#E8B9A5" opacity=".9"/>
+            <circle cx="70" cy="55" r="13" fill="#DDA090"/>
+            <circle cx="70" cy="55" r="8"  fill="#C97A6A"/>
+            <circle cx="45" cy="68" r="14" fill="#F0D0C5" opacity=".9"/>
+            <circle cx="45" cy="68" r="10" fill="#E8B9A5"/>
+            <circle cx="45" cy="68" r="6"  fill="#DDA090"/>
+            <circle cx="85" cy="72" r="12" fill="#F5E0D8" opacity=".9"/>
+            <circle cx="85" cy="72" r="8"  fill="#EDD0C8"/>
+            <circle cx="85" cy="72" r="5"  fill="#E0B5A8"/>
+          </g>
+        </svg>
+
+        <!-- Fleur droite (miroir) -->
+        <svg class="fleur-tr" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g opacity=".85">
+            <ellipse cx="40" cy="80" rx="28" ry="12" fill="#7A9B6E" transform="rotate(-30 40 80)" opacity=".7"/>
+            <ellipse cx="25" cy="65" rx="22" ry="9" fill="#5E8A5A" transform="rotate(-60 25 65)" opacity=".6"/>
+            <ellipse cx="55" cy="90" rx="24" ry="8" fill="#8AAB7E" transform="rotate(-10 55 90)" opacity=".7"/>
+            <circle cx="70" cy="55" r="18" fill="#E8B9A5" opacity=".9"/>
+            <circle cx="70" cy="55" r="13" fill="#DDA090"/>
+            <circle cx="70" cy="55" r="8"  fill="#C97A6A"/>
+            <circle cx="45" cy="68" r="14" fill="#F0D0C5" opacity=".9"/>
+            <circle cx="45" cy="68" r="10" fill="#E8B9A5"/>
+            <circle cx="45" cy="68" r="6"  fill="#DDA090"/>
+            <circle cx="85" cy="72" r="12" fill="#F5E0D8" opacity=".9"/>
+            <circle cx="85" cy="72" r="8"  fill="#EDD0C8"/>
+            <circle cx="85" cy="72" r="5"  fill="#E0B5A8"/>
+          </g>
+        </svg>
+
+        <!-- Mannequin SVG — silhouette féminine élancée -->
+        <svg class="hero-mannequin-svg" viewBox="0 0 240 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="mannGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#D4A017"/>
+              <stop offset="45%" stop-color="#B8860B"/>
+              <stop offset="100%" stop-color="#8B6508"/>
+            </linearGradient>
+            <linearGradient id="mannBody" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F0E4D0"/>
+              <stop offset="100%" stop-color="#DDD0B8"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Base chromée -->
+          <ellipse cx="120" cy="474" rx="46" ry="11" fill="#C9B8A8" opacity=".4"/>
+          <ellipse cx="120" cy="472" rx="32" ry="7" fill="#B8A898" opacity=".35"/>
+          <!-- Tige fine -->
+          <rect x="116" y="402" width="8" height="72" rx="4" fill="#C9B8A8"/>
+          <rect x="118" y="402" width="3" height="72" rx="1.5" fill="rgba(255,255,255,.25)"/>
+
+          <!-- CORPS — silhouette féminine élancée
+               Épaules douces → rétrécissement marqué taille → évasement hanches → bas droit -->
+          <path d="
+            M 96 118
+            C 72 124, 55 148, 53 178
+            C 51 202, 56 222, 62 238
+            C 56 248, 54 260, 56 272
+            C 60 294, 72 318, 82 342
+            C 88 360, 96 382, 100 402
+            L 140 402
+            C 144 382, 152 360, 158 342
+            C 168 318, 180 294, 184 272
+            C 186 260, 184 248, 178 238
+            C 184 222, 189 202, 187 178
+            C 185 148, 168 124, 144 118
+            C 136 114, 128 112, 120 112
+            C 112 112, 104 114, 96 118 Z
+          " fill="url(#mannBody)" stroke="#C9B8A8" stroke-width="1.2"/>
+
+          <!-- Ombre latérale gauche pour volume -->
+          <path d="
+            M 96 118 C 72 124,55 148,53 178
+            C 51 202,56 222,62 238
+            C 56 248,54 260,56 272
+            C 60 294,72 318,82 342 L 90 342
+            C 78 318,67 294,63 272
+            C 61 260,63 248,69 238
+            C 63 222,58 202,60 178
+            C 62 148,78 124,100 118 Z
+          " fill="#C9B8A8" opacity=".25"/>
+
+          <!-- Taille très marquée — creux féminin central -->
+          <path d="M 62 238 C 80 226, 100 222, 120 224 C 140 222, 160 226, 178 238"
+                stroke="#B8A898" stroke-width="1.5" fill="none"/>
+          <!-- Léger reflet taille -->
+          <path d="M 68 235 C 88 225, 104 222, 120 223"
+                stroke="rgba(255,255,255,.3)" stroke-width="1" fill="none"/>
+
+          <!-- Hanches courbe douce -->
+          <path d="M 58 290 C 76 280, 98 276, 120 278 C 142 276, 164 280, 182 290"
+                stroke="#C9B8A8" stroke-width=".8" fill="none" opacity=".6"/>
+
+          <!-- Couture centrale dorée pointillée -->
+          <path d="M 120 118 L 120 402"
+                stroke="#B8860B" stroke-width=".7" stroke-dasharray="4,8" opacity=".3"/>
+
+          <!-- Ligne décor buste -->
+          <path d="M 74 168 Q 120 158 166 168"
+                stroke="#B8860B" stroke-width=".8" fill="none" opacity=".4"/>
+
+          <!-- Cou fin et élancé -->
+          <rect x="111" y="74" width="18" height="44" rx="9" fill="url(#mannBody)" stroke="#C9B8A8" stroke-width="1"/>
+
+          <!-- Tête / haut buste ovale allongé -->
+          <ellipse cx="120" cy="70" rx="22" ry="16" fill="url(#mannBody)" stroke="#C9B8A8" stroke-width="1"/>
+
+          <!-- Épaule gauche — ligne douce et fine -->
+          <path d="M 96 118 Q 68 130, 53 152" stroke="#C9B8A8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- Épaule droite -->
+          <path d="M 144 118 Q 172 130, 187 152" stroke="#C9B8A8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Petit ornement doré sommet -->
+          <ellipse cx="120" cy="52" rx="5" ry="4" fill="url(#mannGold)" opacity=".75"/>
+          <rect x="118" y="55.5" width="4" height="4.5" rx="2" fill="url(#mannGold)" opacity=".6"/>
+        </svg>
+
+        <!-- Badge flottant -->
+        <div class="hero-badge">
+          <p class="hero-badge-label">Jusqu'à</p>
+          <p class="hero-badge-value">−40%</p>
+          <p class="hero-badge-sub">sur les nouvelles pièces</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROMO BAND ─── -->
+  <div class="promo-band">
+    <div class="promo-band-inner">
+      <span class="promo-item"><span class="promo-dot"></span> Livraison offerte dès 60€</span>
+      <span class="promo-item"><span class="promo-dot"></span> Retours gratuits 30 jours</span>
+      <span class="promo-item"><span class="promo-dot"></span> Paiement 3× sans frais</span>
+      <span class="promo-item"><span class="promo-dot"></span> Nouvelles pièces chaque semaine</span>
+      <span class="promo-item"><span class="promo-dot"></span> Livraison offerte dès 60€</span>
+      <span class="promo-item"><span class="promo-dot"></span> Retours gratuits 30 jours</span>
+      <span class="promo-item"><span class="promo-dot"></span> Paiement 3× sans frais</span>
+      <span class="promo-item"><span class="promo-dot"></span> Nouvelles pièces chaque semaine</span>
+    </div>
+  </div>
+
+  <!-- ─── STATS ─── -->
+  <div class="stats-band">
+    <div class="stat-item reveal">
+      <div class="stat-number">500+</div>
+      <div class="stat-label">Références</div>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-number">4.9★</div>
+      <div class="stat-label">Note clients</div>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-number">−40%</div>
+      <div class="stat-label">Jusqu'à</div>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat-item reveal reveal-delay-3">
+      <div class="stat-number">48h</div>
+      <div class="stat-label">Livraison express</div>
+    </div>
+  </div>
+
+  <!-- ─── CATÉGORIES ─── -->
+  <section class="categories" id="categories">
+    <div class="section-heading reveal">
+      <p class="section-eyebrow">Nos univers</p>
+      <h2 class="section-title">Explorer les <em>Collections</em></h2>
+      <div class="section-rule"><span></span><i></i><span></span></div>
+    </div>
+    <div class="cat-grid">
+
+      <div class="cat-card reveal">
+        <div class="cat-placeholder" style="background: linear-gradient(160deg, #EDD5C8, #D4A898);">
+          <svg class="cat-placeholder-svg" width="60" height="100" viewBox="0 0 60 100" fill="none">
+            <ellipse cx="30" cy="14" rx="10" ry="12" fill="#6B4F42"/>
+            <path d="M18 26C10 30 6 48 6 60L54 60C54 48 50 30 42 26" fill="#6B4F42"/>
+            <rect x="27" y="60" width="6" height="30" rx="3" fill="#6B4F42"/>
+          </svg>
+          <span class="cat-placeholder-text">Photo de robe</span>
+        </div>
+        <div class="cat-overlay">
+          <h3 class="cat-name">Robes & Jupes</h3>
+          <a href="#" class="cat-link">Voir la collection →</a>
+        </div>
+      </div>
+
+      <div class="cat-card reveal reveal-delay-1">
+        <div class="cat-placeholder" style="background: linear-gradient(160deg, #F5D9CC, #EABFAF);">
+          <svg class="cat-placeholder-svg" width="70" height="80" viewBox="0 0 70 80" fill="none">
+            <path d="M10 20 L5 70 L65 70 L60 20 L45 10 L35 25 L25 10 Z" fill="#6B4F42"/>
+          </svg>
+          <span class="cat-placeholder-text">Photo de haut</span>
+        </div>
+        <div class="cat-overlay">
+          <h3 class="cat-name">Hauts & Blouses</h3>
+          <a href="#" class="cat-link">Voir la collection →</a>
+        </div>
+      </div>
+
+      <div class="cat-card reveal reveal-delay-2">
+        <div class="cat-placeholder" style="background: linear-gradient(160deg, #F9EDE6, #EDD5C8);">
+          <svg class="cat-placeholder-svg" width="70" height="80" viewBox="0 0 70 80" fill="none">
+            <rect x="15" y="5" width="40" height="70" rx="4" fill="#6B4F42"/>
+            <rect x="25" y="5" width="20" height="15" rx="3" fill="#8C6E63"/>
+          </svg>
+          <span class="cat-placeholder-text">Photo pantalon</span>
+        </div>
+        <div class="cat-overlay">
+          <h3 class="cat-name">Pantalons</h3>
+          <a href="#" class="cat-link">Voir la collection →</a>
+        </div>
+      </div>
+
+      <div class="cat-card reveal reveal-delay-3">
+        <div class="cat-placeholder" style="background: linear-gradient(160deg, #D4A017, #D4BF8A);">
+          <svg class="cat-placeholder-svg" width="70" height="80" viewBox="0 0 70 80" fill="none">
+            <path d="M5 20 Q35 5 65 20 L60 75 L10 75 Z" fill="#6B4F42"/>
+          </svg>
+          <span class="cat-placeholder-text">Photo accessoire</span>
+        </div>
+        <div class="cat-overlay">
+          <h3 class="cat-name">Accessoires</h3>
+          <a href="#" class="cat-link">Voir la collection →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── PRODUITS VEDETTES ─── -->
+  <section class="produits" id="produits">
+    <div class="section-heading reveal">
+      <p class="section-eyebrow">Sélection du moment</p>
+      <h2 class="section-title">Nos <em>Coups de Cœur</em></h2>
+      <p class="section-sub">Pièces soigneusement choisies pour leur qualité, leur confort et leur élégance naturelle.</p>
+      <div class="section-rule"><span></span><i></i><span></span></div>
+    </div>
+    <div class="produits-grid">
+
+      <!-- Produit 1 -->
+      <div class="produit-card reveal">
+        <div class="produit-img-wrap">
+          <div class="produit-placeholder">
+            <svg width="40" height="72" viewBox="0 0 40 72" fill="none">
+              <ellipse cx="20" cy="10" rx="7" ry="8" fill="#8C6E63"/>
+              <path d="M10 18C4 22 2 38 2 48L38 48C38 38 36 22 30 18" fill="#8C6E63"/>
+              <rect x="17.5" y="48" width="5" height="20" rx="2.5" fill="#8C6E63"/>
+            </svg>
+            <span>Photo produit</span>
+          </div>
+          <span class="produit-badge new">Nouveau</span>
+          <div class="produit-actions">
+            <button class="btn-add">Ajouter</button>
+            <button class="btn-wish">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3A2A24" stroke-width="1.5">
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="produit-info">
+          <p class="produit-cat">Robes</p>
+          <h3 class="produit-name">Robe Fleurie Ivoire</h3>
+          <div class="produit-prix">
+            <span class="prix-actuel">39,90 €</span>
+            <span class="prix-barre">59,90 €</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produit 2 -->
+      <div class="produit-card reveal reveal-delay-1">
+        <div class="produit-img-wrap">
+          <div class="produit-placeholder" style="background: linear-gradient(160deg, #F5D9CC, #EDD5C8);">
+            <svg width="48" height="60" viewBox="0 0 48 60" fill="none">
+              <path d="M6 14 L2 55 L46 55 L42 14 L30 6 L24 18 L18 6 Z" fill="#8C6E63"/>
+            </svg>
+            <span>Photo produit</span>
+          </div>
+        </div>
+        <div class="produit-info">
+          <p class="produit-cat">Hauts</p>
+          <h3 class="produit-name">Blouse Romantique Rosé</h3>
+          <div class="produit-prix">
+            <span class="prix-actuel">29,90 €</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produit 3 -->
+      <div class="produit-card reveal reveal-delay-2">
+        <div class="produit-img-wrap">
+          <div class="produit-placeholder" style="background: linear-gradient(160deg, #D4A017, #D4BF8A);">
+            <svg width="48" height="60" viewBox="0 0 48 60" fill="none">
+              <rect x="10" y="4" width="28" height="50" rx="3" fill="#8C6E63"/>
+              <rect x="18" y="4" width="12" height="12" rx="2" fill="#6B4F42"/>
+            </svg>
+            <span>Photo produit</span>
+          </div>
+          <span class="produit-badge promo">−30%</span>
+          <div class="produit-actions">
+            <button class="btn-add">Ajouter</button>
+            <button class="btn-wish">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3A2A24" stroke-width="1.5">
+                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="produit-info">
+          <p class="produit-cat">Pantalons</p>
+          <h3 class="produit-name">Pantalon Large Camel</h3>
+          <div class="produit-prix">
+            <span class="prix-actuel">34,90 €</span>
+            <span class="prix-barre">49,90 €</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Produit 4 -->
+      <div class="produit-card reveal reveal-delay-3">
+        <div class="produit-img-wrap">
+          <div class="produit-placeholder" style="background: linear-gradient(160deg, #EDD5C8, #D4A898);">
+            <svg width="40" height="72" viewBox="0 0 40 72" fill="none">
+              <ellipse cx="20" cy="10" rx="7" ry="8" fill="#8C6E63"/>
+              <path d="M5 18 L2 58 L38 58 L35 18 Z" fill="#8C6E63"/>
+              <rect x="17.5" y="58" width="5" height="10" rx="2.5" fill="#8C6E63"/>
+            </svg>
+            <span>Photo produit</span>
+          </div>
+          <span class="produit-badge new">Nouveau</span>
+        </div>
+        <div class="produit-info">
+          <p class="produit-cat">Robes</p>
+          <h3 class="produit-name">Combinaison Satin Nude</h3>
+          <div class="produit-prix">
+            <span class="prix-actuel">44,90 €</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top: 56px;" class="reveal">
+      <a href="#" class="btn-primary">Voir toute la boutique</a>
+    </div>
+  </section>
+
+  <!-- ─── VALEURS ─── -->
+  <section class="valeurs" id="valeurs">
+    <div class="section-heading reveal">
+      <p class="section-eyebrow">Notre promesse</p>
+      <h2 class="section-title">L'ADN <em>Naj'Elle</em></h2>
+      <div class="section-rule"><span></span><i></i><span></span></div>
+    </div>
+    <div class="valeurs-grid">
+
+      <div class="valeur-item reveal">
+        <div class="valeur-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="1.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3 class="valeur-title">Qualité Certifiée</h3>
+        <p class="valeur-text">Chaque pièce est soigneusement sélectionnée pour ses matières, sa coupe et sa durabilité. Nous ne proposons que ce que nous porterions nous-mêmes.</p>
+      </div>
+
+      <div class="valeur-item reveal reveal-delay-1">
+        <div class="valeur-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+        </div>
+        <h3 class="valeur-title">Prix Accessibles</h3>
+        <p class="valeur-text">La mode de qualité ne devrait pas être un privilège. Nous négocions pour vous offrir des pièces premium à des tarifs honnêtes et transparents.</p>
+      </div>
+
+      <div class="valeur-item reveal reveal-delay-2">
+        <div class="valeur-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="1.5">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+        </div>
+        <h3 class="valeur-title">Confort & Style</h3>
+        <p class="valeur-text">Nos créations épousent le corps avec grâce. Parce qu'une femme qui se sent bien dans ses vêtements rayonne naturellement de confiance.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── LOOKBOOK ─── -->
+  <section class="lookbook" id="lookbook">
+    <div class="lookbook-layout">
+      <div class="lookbook-visual">
+        <div class="lb-img">
+          <div class="lb-placeholder">
+            <svg width="40" height="60" viewBox="0 0 40 60" fill="none">
+              <ellipse cx="20" cy="10" rx="8" ry="9" fill="#8C6E63" opacity=".5"/>
+              <path d="M8 19C2 24 0 40 0 52L40 52C40 40 38 24 32 19" fill="#8C6E63" opacity=".5"/>
+            </svg>
+            <span>Lookbook photo 1</span>
+          </div>
+        </div>
+        <div class="lb-img" style="background: linear-gradient(160deg, #EDD5C8, #D4A898);">
+          <div class="lb-placeholder">
+            <svg width="40" height="60" viewBox="0 0 40 60" fill="none">
+              <ellipse cx="20" cy="10" rx="8" ry="9" fill="#6B4F42" opacity=".5"/>
+              <path d="M8 19C2 24 0 40 0 52L40 52C40 40 38 24 32 19" fill="#6B4F42" opacity=".5"/>
+            </svg>
+            <span>Lookbook photo 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lookbook-content">
+        <div class="section-heading reveal">
+          <p class="section-eyebrow">Inspiration printemps</p>
+          <h2 class="section-title">Le Lookbook<br><em>Naj'Elle</em></h2>
+          <div class="section-rule"><span></span><i></i><span></span></div>
+        </div>
+        <p class="lookbook-text reveal">
+          La collection Printemps célèbre la légèreté et la féminité douce. Des teintes rosées, des matières fluides, des coupes qui libèrent — chaque tenue raconte une histoire de confort et de grâce au quotidien.
+        </p>
+        <p class="lookbook-text reveal" style="font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--brun-doux);">
+          « S'habiller bien, c'est se respecter. »
+        </p>
+        <div class="reveal">
+          <a href="#" class="btn-primary">Explorer le lookbook</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── NEWSLETTER ─── -->
+  <section class="newsletter" id="contact">
+    <p class="newsletter-eyebrow reveal">Restez dans la tendance</p>
+    <h2 class="newsletter-title reveal"><em>Rejoignez</em> la communauté</h2>
+    <p class="newsletter-sub reveal">Nouveautés en avant-première, offres exclusives et conseils style directement dans votre boîte mail.</p>
+    <div class="newsletter-form reveal">
+      <input class="newsletter-input" type="email" placeholder="Votre adresse email…"/>
+      <button class="newsletter-btn">S'inscrire</button>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg width="22" height="42" viewBox="0 0 28 52" fill="none">
+            <ellipse cx="14" cy="4.5" rx="4.5" ry="4" fill="#B8860B"/>
+            <rect x="12.5" y="8" width="3" height="5" rx="1.5" fill="#B8860B"/>
+            <path d="M5 13 C2 15,1 20,1.5 24 C2 28,4 30,4.5 32 C3 34,2.5 36,3 38 C3.5 41,5.5 44,7 45 L21 45 C22.5 44,24.5 41,25 38 C25.5 36,25 34,23.5 32 C24 30,26 28,26.5 24 C27 20,26 15,23 13 C20.5 11.5,17 11,14 11 C11 11,7.5 11.5,5 13Z" fill="#B8860B"/>
+            <path d="M4 31 Q14 27.5 24 31" fill="none" stroke="#7A5A08" stroke-width="1"/>
+            <rect x="12.8" y="45" width="2.4" height="5" rx="1.2" fill="#7A5A08" opacity=".8"/>
+            <ellipse cx="14" cy="50.5" rx="7" ry="1.8" fill="#7A5A08" opacity=".45"/>
+          </svg>
+          <span class="footer-brand-text">Naj<span>'</span>Elle</span>
+        </div>
+        <p class="footer-tagline">Prêt-à-porter féminin — Confort & Style</p>
+        <div class="footer-socials">
+          <!-- Instagram -->
+          <div class="social-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,250,247,.5)" stroke-width="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="rgba(255,250,247,.5)" stroke="none"/>
+            </svg>
+          </div>
+          <!-- Facebook -->
+          <div class="social-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,250,247,.5)" stroke-width="1.5">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+            </svg>
+          </div>
+          <!-- TikTok -->
+          <div class="social-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,250,247,.5)">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.78a4.85 4.85 0 01-1.01-.09z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Boutique</p>
+        <ul class="footer-links">
+          <li><a href="#">Nouveautés</a></li>
+          <li><a href="#">Robes & Jupes</a></li>
+          <li><a href="#">Hauts & Blouses</a></li>
+          <li><a href="#">Pantalons</a></li>
+          <li><a href="#">Accessoires</a></li>
+          <li><a href="#">Promotions</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Informations</p>
+        <ul class="footer-links">
+          <li><a href="#">Notre histoire</a></li>
+          <li><a href="#">Guide des tailles</a></li>
+          <li><a href="#">Livraison & Retours</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Blog mode</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="#">naj_elle (Instagram)</a></li>
+          <li><a href="#"><span class="__cf_email__" data-cfemail="72111d1c06131106321c1318171e1e175c1400">[email&#160;protected]</span></a></li>
+          <li><a href="#">Lun–Sam · 9h–19h</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Naj'Elle — Tous droits réservés</p>
+      <div class="footer-payments">
+        <span class="payment-chip">Visa</span>
+        <span class="payment-chip">Mastercard</span>
+        <span class="payment-chip">PayPal</span>
+        <span class="payment-chip">Apple Pay</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── JS ─── -->
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
