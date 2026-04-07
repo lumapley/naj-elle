@@ -1014,6 +1014,13 @@ footer { background: var(--noir-doux); padding: 70px 60px 40px; }
   /* Drawer full width */
   .nav-drawer-panel { width: 100%; }
 
-  /* User dropdown en bas */
-  .user-dropdown { right: -8px; left: -8px; min-width: unset; }
+  /* User dropdown : fixé au viewport pour éviter débordement */
+  .user-dropdown {
+    position: fixed;
+    top: 68px;
+    right: 12px;
+    left: 12px;
+    min-width: unset;
+    width: auto;
+  }
 }
