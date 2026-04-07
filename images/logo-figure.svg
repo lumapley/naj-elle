@@ -1,0 +1,31 @@
+<svg viewBox="0 0 120 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gold" x1="0.3" y1="0" x2="0.7" y2="1">
+      <stop offset="0%"   stop-color="#D4A017"/>
+      <stop offset="48%"  stop-color="#B8860B"/>
+      <stop offset="100%" stop-color="#8B6014"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Tête — cercle ouvert en bas, le corps en repart -->
+  <path d="M 56 38 A 18 18 0 1 1 74 38"
+        stroke="url(#gold)" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+
+  <!-- Côté gauche : épaule étroite, taille, hanche, jambe -->
+  <path d="
+    M 56 38
+    C 46 50, 20 65, 12 92
+    C  4 116, 34 152, 46 172
+    C 52 184, 38 214, 33 246
+    L 31 272
+  " stroke="url(#gold)" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+
+  <!-- Côté droit : épaule plus haute et large, taille, hanche, jambe -->
+  <path d="
+    M 74 38
+    C 84 48, 108 62, 114 88
+    C 120 112, 96 150, 84 170
+    C 78 182, 92 212, 96 244
+    L 98 272
+  " stroke="url(#gold)" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+</svg>

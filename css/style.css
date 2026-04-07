@@ -48,7 +48,7 @@ nav.scrolled { padding: 14px 60px; }
   display: flex; align-items: center; gap: 12px;
   text-decoration: none;
 }
-.nav-logo-icon { width: 22px; height: 42px; }
+.nav-logo-icon { width: 26px; height: 60px; display: block; }
 .nav-logo-text {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.35rem; font-weight: 600; letter-spacing: .12em;
@@ -364,10 +364,9 @@ nav.scrolled { padding: 14px 60px; }
 .hero {
   min-height: 100vh;
   background: linear-gradient(160deg, #F2C4B8 0%, #EAAD9E 35%, #F5D0C4 75%, #F9E8E0 100%);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center;
-  padding: 130px 40px 90px;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 60px;
+  padding: 130px 80px 90px;
   position: relative; overflow: hidden;
 }
 .hero::before {
@@ -425,7 +424,16 @@ nav.scrolled { padding: 14px 60px; }
   color: var(--texte-leger); max-width: 520px;
   margin: 0 auto 52px;
 }
-.hero-ctas { display: flex; gap: 20px; align-items: center; justify-content: center; }
+.hero-ctas { display: flex; gap: 20px; align-items: center; }
+
+.hero-figure {
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-figure-img {
+  width: 180px; height: auto;
+  opacity: .88;
+  filter: drop-shadow(0 20px 50px rgba(184,134,11,.18));
+}
 
 /* ══════════════════════════════════════════════
    PROMO BAND
@@ -910,7 +918,11 @@ footer { background: var(--noir-doux); padding: 70px 60px 40px; }
   .nav-links { display: none; }
   .nav-burger { display: flex; }
 
-  .hero { padding: 120px 30px 60px; }
+  .hero { grid-template-columns: 1fr; padding: 120px 30px 60px; text-align: center; }
+  .hero-eyebrow, .hero-ctas, .hero-ornament { justify-content: center; }
+  .hero-desc { margin-inline: auto; }
+  .hero-figure { margin-top: 20px; }
+  .hero-figure-img { width: 120px; }
 
   .categories { padding: 60px 30px; }
   .cat-grid { grid-template-columns: 1fr 1fr; }
@@ -982,6 +994,7 @@ footer { background: var(--noir-doux); padding: 70px 60px 40px; }
   .hero { padding: 100px 20px 50px; }
   .hero-title { font-size: clamp(2.6rem, 11vw, 3.8rem); }
   .hero-ornament span { width: 40px; }
+  .hero-figure-img { width: 90px; }
   .hero-ctas { flex-direction: column; align-items: center; gap: 12px; }
   .hero-ctas .btn-primary, .hero-ctas .btn-secondary { width: 100%; text-align: center; justify-content: center; }
   .produits-grid { grid-template-columns: 1fr; }
