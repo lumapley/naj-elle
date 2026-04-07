@@ -127,16 +127,22 @@
 
     <!-- Topbar -->
     <div class="admin-topbar">
-      <h1 class="admin-page-title" id="topbar-title">Tableau de bord</h1>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <button class="admin-burger" id="admin-burger" onclick="toggleAdminSidebar()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <h1 class="admin-page-title" id="topbar-title">Tableau de bord</h1>
+      </div>
       <div class="admin-topbar-actions">
         <button class="btn-admin gold" onclick="navigateTo('products'); setTimeout(openAddModal, 100)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
           </svg>
-          Ajouter un produit
+          <span class="btn-admin-label">Ajouter un produit</span>
         </button>
       </div>
     </div>
+    <div class="admin-sidebar-overlay" id="admin-sidebar-overlay" onclick="toggleAdminSidebar()"></div>
 
     <div class="admin-content">
 

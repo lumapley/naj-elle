@@ -4,9 +4,25 @@
 'use strict';
 
 /* ─── État global ─── */
-let editingId   = null;   // ID du produit en cours d'édition (null = création)
+let editingId   = null;
 let pendingDeleteId = null;
 let previewDataUrl  = null;
+
+/* ─── Sidebar mobile ─── */
+function toggleAdminSidebar() {
+  const sidebar  = document.querySelector('.admin-sidebar');
+  const overlay  = document.getElementById('admin-sidebar-overlay');
+  const burger   = document.getElementById('admin-burger');
+  sidebar?.classList.toggle('open');
+  overlay?.classList.toggle('open');
+  burger?.classList.toggle('open');
+}
+
+function closeAdminSidebar() {
+  document.querySelector('.admin-sidebar')?.classList.remove('open');
+  document.getElementById('admin-sidebar-overlay')?.classList.remove('open');
+  document.getElementById('admin-burger')?.classList.remove('open');
+}
 
 /* ══════════════════════════════════════════════
    INIT
@@ -69,6 +85,9 @@ async function logout() {
    NAVIGATION SIDEBAR
    ══════════════════════════════════════════════ */
 function navigateTo(section) {
+  /* Fermer la sidebar sur mobile */
+  closeAdminSidebar();
+
   /* Désactiver tous les liens */
   document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
   document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));

@@ -476,20 +476,65 @@ body {
 .confirm-box p { font-size: .88rem; color: var(--texte-leger); margin-bottom: 28px; }
 .confirm-actions { display: flex; gap: 12px; justify-content: center; }
 
+/* ─── Burger admin (caché sur desktop) ─── */
+.admin-burger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px; flex-shrink: 0;
+}
+.admin-burger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--texte); border-radius: 2px; transition: all .3s;
+}
+.admin-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.admin-burger.open span:nth-child(2) { opacity: 0; }
+.admin-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Overlay sidebar mobile */
+.admin-sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.5); z-index: 9;
+}
+.admin-sidebar-overlay.open { display: block; }
+
 /* ══════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════ */
 @media (max-width: 900px) {
-  :root { --sidebar-w: 220px; }
+  :root { --sidebar-w: 240px; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .admin-content { padding: 24px; }
+  .admin-products-grid { grid-template-columns: 1fr 1fr; }
 }
+
 @media (max-width: 680px) {
-  .admin-sidebar { transform: translateX(-100%); transition: transform .3s; }
+  .admin-burger { display: flex; }
+  .admin-sidebar {
+    transform: translateX(-100%);
+    transition: transform .3s ease;
+    z-index: 10;
+  }
   .admin-sidebar.open { transform: translateX(0); }
   .admin-main { margin-left: 0; }
-  .stats-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .admin-content { padding: 16px; }
   .form-grid { grid-template-columns: 1fr; }
-  .admin-toolbar { flex-direction: column; align-items: stretch; }
+  .admin-toolbar { flex-direction: column; align-items: stretch; gap: 10px; }
   .admin-search { width: 100%; }
+  .admin-topbar { padding: 14px 16px; }
+  .admin-page-title { font-size: 1.1rem; }
+  .btn-admin-label { display: none; }
+  .admin-modal-inner {
+    width: 100%; max-width: 100%; margin: 0;
+    border-radius: 12px 12px 0 0;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .admin-modal { align-items: flex-end; padding: 0; }
+  .admin-products-grid { grid-template-columns: 1fr; }
+  .stat-card { padding: 16px; }
+  .stat-card-value { font-size: 1.6rem; }
+}
+
+@media (max-width: 400px) {
+  .stats-grid { grid-template-columns: 1fr; }
 }

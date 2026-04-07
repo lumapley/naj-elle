@@ -971,3 +971,49 @@ footer { background: var(--noir-doux); padding: 70px 60px 40px; }
   .panier-item { grid-template-columns: 80px 1fr; }
   .panier-item-price { display: none; }
 }
+
+/* ──────────────────────────────────────────────
+   NAV MOBILE — compacte
+   ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  /* Cacher le texte "Panier (0)", garder juste l'icône + badge */
+  .btn-panier-label { display: none; }
+  .btn-panier {
+    padding: 8px 12px; gap: 4px;
+    border-radius: 50%; width: 40px; height: 40px;
+    justify-content: center;
+  }
+  .panier-count {
+    position: absolute; top: -4px; right: -4px;
+    width: 16px; height: 16px; font-size: .6rem;
+  }
+  .btn-panier { position: relative; }
+
+  /* Bouton user : icône uniquement */
+  .btn-user { padding: 8px; border-radius: 50%; width: 40px; height: 40px; justify-content: center; }
+  #user-nav-label { display: none; }
+
+  /* nav-actions plus compact */
+  .nav-actions { gap: 8px; }
+}
+
+@media (max-width: 480px) {
+  nav { padding: 14px 16px; }
+  nav.scrolled { padding: 10px 16px; }
+  .hero { padding: 100px 20px 50px; }
+  .hero-title { font-size: clamp(2rem, 10vw, 3rem); }
+  .hero-ctas { flex-direction: column; align-items: center; gap: 12px; }
+  .hero-ctas .btn-primary, .hero-ctas .btn-secondary { width: 100%; text-align: center; justify-content: center; }
+  .produits-grid { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: 1fr; }
+  .panier-layout { padding: 100px 16px 40px; }
+  .panier-summary { padding: 24px 16px; }
+  .boutique-layout { padding: 30px 16px; }
+  .page-hero-small { padding: 110px 16px 40px; }
+
+  /* Drawer full width */
+  .nav-drawer-panel { width: 100%; }
+
+  /* User dropdown en bas */
+  .user-dropdown { right: -8px; left: -8px; min-width: unset; }
+}
