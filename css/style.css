@@ -364,9 +364,10 @@ nav.scrolled { padding: 14px 60px; }
 .hero {
   min-height: 100vh;
   background: linear-gradient(160deg, #F2C4B8 0%, #EAAD9E 35%, #F5D0C4 75%, #F9E8E0 100%);
-  display: grid; grid-template-columns: 1fr 1fr;
-  align-items: center;
-  padding: 100px 60px 60px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 130px 40px 90px;
   position: relative; overflow: hidden;
 }
 .hero::before {
@@ -376,73 +377,55 @@ nav.scrolled { padding: 14px 60px; }
   opacity: .4; pointer-events: none;
 }
 .hero-deco-1 {
-  position: absolute; width: 500px; height: 500px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,169,110,.12) 0%, transparent 70%);
-  top: -100px; right: -80px; pointer-events: none;
+  position: absolute; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,169,110,.10) 0%, transparent 70%);
+  top: -150px; right: -150px; pointer-events: none;
 }
 .hero-deco-2 {
-  position: absolute; width: 300px; height: 300px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(232,185,165,.25) 0%, transparent 70%);
-  bottom: 40px; left: 20px; pointer-events: none;
+  position: absolute; width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,185,165,.22) 0%, transparent 70%);
+  bottom: -60px; left: -80px; pointer-events: none;
 }
-.hero-content { position: relative; z-index: 2; }
+.hero-deco-3 {
+  position: absolute; width: 350px; height: 350px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,169,110,.08) 0%, transparent 70%);
+  top: 50%; left: -100px; transform: translateY(-50%); pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 780px; width: 100%;
+}
 .hero-eyebrow {
   font-size: .72rem; letter-spacing: .35em; text-transform: uppercase;
-  color: var(--gold); font-weight: 400; margin-bottom: 20px;
-  display: flex; align-items: center; gap: 12px;
+  color: var(--gold); font-weight: 400; margin-bottom: 28px;
+  display: flex; align-items: center; justify-content: center; gap: 16px;
 }
-.hero-eyebrow::before {
-  content: ''; display: block; width: 32px; height: 1px; background: var(--gold);
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: ''; display: block; width: 40px; height: 1px; background: var(--gold); opacity: .7;
 }
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3.2rem, 6vw, 5.8rem);
-  font-weight: 300; line-height: 1.05;
-  color: var(--texte); margin-bottom: 28px;
+  font-size: clamp(3.8rem, 7vw, 7rem);
+  font-weight: 300; line-height: 1.0;
+  color: var(--texte); margin-bottom: 0;
 }
 .hero-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+.hero-ornament {
+  display: flex; align-items: center; justify-content: center;
+  gap: 18px; margin: 36px auto 38px;
+}
+.hero-ornament span {
+  display: block; width: 70px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+  opacity: .55;
+}
 .hero-desc {
-  font-size: .95rem; font-weight: 300; line-height: 1.85;
-  color: var(--texte-leger); max-width: 420px; margin-bottom: 48px;
+  font-size: .97rem; font-weight: 300; line-height: 1.9;
+  color: var(--texte-leger); max-width: 520px;
+  margin: 0 auto 52px;
 }
-.hero-ctas { display: flex; gap: 20px; align-items: center; }
-
-.hero-visual {
-  position: relative; z-index: 2;
-  display: flex; justify-content: center; align-items: flex-end;
-}
-.hero-mannequin-wrap { position: relative; width: 380px; height: 520px; }
-.hero-mannequin-svg {
-  width: 100%; height: 100%;
-  filter: drop-shadow(0 30px 60px rgba(58,42,36,.15));
-  animation: float 6s ease-in-out infinite;
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-12px); }
-}
-.fleur-tl, .fleur-tr {
-  position: absolute; width: 140px; height: 140px;
-}
-.fleur-tl { top: -30px; left: -30px; }
-.fleur-tr { top: -20px; right: -20px; transform: scaleX(-1); }
-
-.hero-badge {
-  position: absolute; bottom: 40px; left: -30px;
-  background: var(--blanc); border: 1px solid var(--gold-light);
-  border-radius: 12px; padding: 18px 24px;
-  box-shadow: 0 8px 32px rgba(201,169,110,.15);
-  animation: float 6s ease-in-out infinite reverse;
-}
-.hero-badge-label {
-  font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--texte-leger); margin-bottom: 4px;
-}
-.hero-badge-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem; font-weight: 600; color: var(--gold);
-}
-.hero-badge-sub { font-size: .72rem; color: var(--texte-leger); margin-top: 2px; }
+.hero-ctas { display: flex; gap: 20px; align-items: center; justify-content: center; }
 
 /* ══════════════════════════════════════════════
    PROMO BAND
@@ -927,11 +910,7 @@ footer { background: var(--noir-doux); padding: 70px 60px 40px; }
   .nav-links { display: none; }
   .nav-burger { display: flex; }
 
-  .hero { grid-template-columns: 1fr; padding: 120px 30px 60px; text-align: center; }
-  .hero-eyebrow, .hero-ctas { justify-content: center; }
-  .hero-desc { margin-inline: auto; }
-  .hero-visual { justify-content: center; margin-top: 40px; }
-  .hero-mannequin-wrap { width: 280px; height: 380px; }
+  .hero { padding: 120px 30px 60px; }
 
   .categories { padding: 60px 30px; }
   .cat-grid { grid-template-columns: 1fr 1fr; }
@@ -1001,7 +980,8 @@ footer { background: var(--noir-doux); padding: 70px 60px 40px; }
   nav { padding: 14px 16px; }
   nav.scrolled { padding: 10px 16px; }
   .hero { padding: 100px 20px 50px; }
-  .hero-title { font-size: clamp(2rem, 10vw, 3rem); }
+  .hero-title { font-size: clamp(2.6rem, 11vw, 3.8rem); }
+  .hero-ornament span { width: 40px; }
   .hero-ctas { flex-direction: column; align-items: center; gap: 12px; }
   .hero-ctas .btn-primary, .hero-ctas .btn-secondary { width: 100%; text-align: center; justify-content: center; }
   .produits-grid { grid-template-columns: 1fr; }
