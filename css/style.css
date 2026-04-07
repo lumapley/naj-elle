@@ -61,7 +61,7 @@ nav.scrolled { padding: 14px 60px; }
   font-size: .48rem; letter-spacing: .3em; text-transform: uppercase;
   color: var(--gold); font-weight: 400; white-space: nowrap;
 }
-.logo-leaf { width: 50px; height: 22px; flex-shrink: 0; }
+.logo-leaf { width: 58px; height: 24px; flex-shrink: 0; }
 
 .nav-links {
   display: flex; gap: 40px; list-style: none;
