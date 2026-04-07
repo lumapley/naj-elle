@@ -45,16 +45,23 @@ nav {
 nav.scrolled { padding: 14px 60px; }
 
 .nav-logo {
-  display: flex; align-items: center; gap: 12px;
-  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none; flex-shrink: 0;
 }
-.nav-logo-icon { width: 26px; height: 60px; display: block; }
+.logo-text-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
 .nav-logo-text {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.35rem; font-weight: 600; letter-spacing: .12em;
-  color: var(--texte);
+  font-size: 1.75rem; font-weight: 600; letter-spacing: .05em;
+  color: var(--texte); line-height: 1;
 }
-.nav-logo-text span { color: var(--gold); }
+.logo-tagline {
+  font-family: 'Jost', sans-serif;
+  font-size: .48rem; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--gold); font-weight: 400; white-space: nowrap;
+}
+.logo-leaf { width: 50px; height: 22px; flex-shrink: 0; }
 
 .nav-links {
   display: flex; gap: 40px; list-style: none;
@@ -364,9 +371,10 @@ nav.scrolled { padding: 14px 60px; }
 .hero {
   min-height: 100vh;
   background: linear-gradient(160deg, #F2C4B8 0%, #EAAD9E 35%, #F5D0C4 75%, #F9E8E0 100%);
-  display: grid; grid-template-columns: 1fr auto;
-  align-items: center; gap: 60px;
-  padding: 130px 80px 90px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 130px 40px 90px;
   position: relative; overflow: hidden;
 }
 .hero::before {
@@ -424,16 +432,7 @@ nav.scrolled { padding: 14px 60px; }
   color: var(--texte-leger); max-width: 520px;
   margin: 0 auto 52px;
 }
-.hero-ctas { display: flex; gap: 20px; align-items: center; }
-
-.hero-figure {
-  display: flex; align-items: center; justify-content: center;
-}
-.hero-figure-img {
-  width: 180px; height: auto;
-  opacity: .88;
-  filter: drop-shadow(0 20px 50px rgba(184,134,11,.18));
-}
+.hero-ctas { display: flex; gap: 20px; align-items: center; justify-content: center; }
 
 /* ══════════════════════════════════════════════
    PROMO BAND
@@ -918,11 +917,8 @@ footer { background: var(--noir-doux); padding: 70px 60px 40px; }
   .nav-links { display: none; }
   .nav-burger { display: flex; }
 
-  .hero { grid-template-columns: 1fr; padding: 120px 30px 60px; text-align: center; }
-  .hero-eyebrow, .hero-ctas, .hero-ornament { justify-content: center; }
-  .hero-desc { margin-inline: auto; }
-  .hero-figure { margin-top: 20px; }
-  .hero-figure-img { width: 120px; }
+  .hero { padding: 120px 30px 60px; }
+  .logo-leaf { display: none; }
 
   .categories { padding: 60px 30px; }
   .cat-grid { grid-template-columns: 1fr 1fr; }
@@ -994,7 +990,6 @@ footer { background: var(--noir-doux); padding: 70px 60px 40px; }
   .hero { padding: 100px 20px 50px; }
   .hero-title { font-size: clamp(2.6rem, 11vw, 3.8rem); }
   .hero-ornament span { width: 40px; }
-  .hero-figure-img { width: 90px; }
   .hero-ctas { flex-direction: column; align-items: center; gap: 12px; }
   .hero-ctas .btn-primary, .hero-ctas .btn-secondary { width: 100%; text-align: center; justify-content: center; }
   .produits-grid { grid-template-columns: 1fr; }
